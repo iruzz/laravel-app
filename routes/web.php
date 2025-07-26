@@ -9,3 +9,5 @@ Route::get('/', function () {
 });
 
 Route::get('/siswa', [SiswaController::class, 'index']);
+
+Route::view('/admin', 'admin.index');
