@@ -11,8 +11,7 @@ Route::get('/', function () {
 Route::get('/siswa', 
 [SiswaController::class, 'baca']);
 
-Route::get('/siswa/{id}', function ($id) {
-    return "ID Siswa: " . $id;
-});
+Route::get('/siswa/{id}',
+[SiswaController::class, 'tampil']);
 
 Route::view('/admin', 'admin.index');

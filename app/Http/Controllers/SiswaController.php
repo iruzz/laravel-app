@@ -13,4 +13,8 @@ class SiswaController extends Controller
         return view('siswa.index', compact('data'));
     }
 
+    public function tampil($id) 
+    {
+        return "Menampilkan data siswa dengan ID : ".$id;
+    }
 }
