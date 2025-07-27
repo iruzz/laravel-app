@@ -11,7 +11,11 @@ Route::get('/', function () {
 Route::get('/siswa', 
 [SiswaController::class, 'baca']);
 
-Route::get('/siswa/{id}',
-[SiswaController::class, 'tampil']);
+Route::get('/siswa/{id}', function ($id) {
+    return view('siswa.detail', [
+        'nomer'=>$id
+    ]
+    );
+});
 
 Route::view('/admin', 'admin.index');
