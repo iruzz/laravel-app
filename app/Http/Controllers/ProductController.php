@@ -80,4 +80,39 @@ class ProductController extends Controller
         //render view with product
         return view('products.edit', compact('product'));
     }
+
+    public function update(Request $request, string $id): RedirectResponse
+    {
+        //validate form
+        $request->validate([
+            'image'         => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+            'title'         => 'required|min:5',
+            'description'   => 'required|min:10',
+            'price'         => 'required|numeric',
+            'stock'         => 'required|numeric'
+        ]);
+
+        //find product by ID
+        $product = Product::findOrFail($id);
+
+        //check if image is uploaded
+        if ($request->hasFile('image')) {
+            //upload new image
+            $image = $request->file('image');
+            $image->storeAs('public/products', $image->hashName());
+            $product->image = $image->hashName();
+        }
+
+        //update product details
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+
+        //save product
+        $product->save();
+
+        //redirect to index
+        return redirect()->route('products.index')->with(['success' => 'Data Berhasil Diupdate!']);
+    }
 }
