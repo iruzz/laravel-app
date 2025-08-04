@@ -115,4 +115,16 @@ class ProductController extends Controller
         //redirect to index
         return redirect()->route('products.index')->with(['success' => 'Data Berhasil Diupdate!']);
     }
+
+    public function destroy(string $id): RedirectResponse
+    {
+        //find product by ID
+        $product = Product::findOrFail($id);
+
+        //delete product
+        $product->delete();
+
+        //redirect to index
+        return redirect()->route('products.index')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
 }
