@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\homecontroller;
 
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,5 @@ Route::get('/siswa/{id}', function ($id) {
 Route::view('/admin', 'admin.index');
 
 Route::resource('/products', ProductController::class);
+
+Route::get('/home', [homecontroller::class, 'index']);
